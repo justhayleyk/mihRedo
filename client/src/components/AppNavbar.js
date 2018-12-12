@@ -9,7 +9,7 @@ import {
   NavLink,
   Container } from 'reactstrap';
 
-class AppNavbar extends React.Component {
+class AppNavbar extends Component {
   state = {
     isOpen: false
   }
