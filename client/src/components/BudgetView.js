@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import {   Container, Button, ListGroup, ListGroupItem, Table } from 'reactstrap';
-import { CSSTransition, TransitionGroup }  from 'react-transition-group';
+import {   Container  } from 'reactstrap';
+// import { CSSTransition, TransitionGroup }  from 'react-transition-group';
 import uuid from 'uuid';
+import TableView from './TableView'
+import InputForm from './InputForm'
 
 class BudgetView extends Component {
   state = {
@@ -19,6 +21,7 @@ class BudgetView extends Component {
         itemName: "Uber",
         amount: 200,
         frequency:  "variable",
+        nextPayment:  " ",
         category:  "income"
         },
         {
@@ -34,6 +37,7 @@ class BudgetView extends Component {
         itemName: "Dentist",
         amount: 200,
         frequency:  "variable",
+        nextPayment:  " ",
         category:  "expense"
         }
     ] 
@@ -41,45 +45,28 @@ class BudgetView extends Component {
 
 
 
-
   render() {
     const { items } = this.state
-    console.log(this.state)
 
     return (
         <Container>
-            <Button
-                color="dark"
-                style={{marginBottom: '2rem'}}
-                onClick={() => {
-                    const name = prompt('Enter Item');
-                    if(name) {
-                        this.setState(state => ({
-                            items: [...state.items, {id: uuid(), items}]
-                        }))
-                    }
-                }}
-            >Add Item</Button>
-            <ListGroup>
-                <TransitionGroup className="budgetList">
-                    {items.map(({id, itemName, amount}) => (
-                        <ListGroupItem>
-                            <Button className="remove-btn"
-                            color="danger"
-                            size="sm"
-                            onClick={()=> {
-                                this.setState( state => ({
-                                    items: state.items.filter( item => item.id !==id)
-                                }));
-                            }}>&times; </Button>
-                            {itemName}
-                        </ListGroupItem>
-                    ))}
-                </TransitionGroup>
-            </ListGroup>
+            <InputForm />
+            
+        
+            <hr />
+
+            <TableView title="Your Budget Information" tableData={items} />
+          
+                    
+            
+
+
+
         </Container>
     );
   }
 }
 
 export default BudgetView;
+
+
